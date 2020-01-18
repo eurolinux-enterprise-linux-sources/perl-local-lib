@@ -1,6 +1,6 @@
 Name:       perl-local-lib
 Version:    1.008010
-Release:    3%{?dist}
+Release:    4%{?dist}
 # lib/local/lib.pm -> GPL+ or Artistic
 License:    GPL+ or Artistic
 Group:      Development/Libraries
@@ -55,6 +55,7 @@ Group:      Development/Libraries
 Summary:    Per-user Perl local::lib setup
 Requires:   %{name} = %{version}-%{release}
 Requires:   /usr/bin/cpan
+Requires:   /bin/sed
 
 %description -n perl-homedir
 perl-homedir configures the system to automatically create a ~/perl5
@@ -95,6 +96,10 @@ make test
 %{_sysconfdir}/profile.d/*
 
 %changelog
+* Fri Jul 25 2014 Petr Pisar <ppisar@redhat.com> - 1.008010-4
+- Parse perl-homedir configuration bash syntax by csh profile script
+  (bug #1122993)
+
 * Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 1.008010-3
 - Mass rebuild 2013-12-27
 
