@@ -1,6 +1,6 @@
 Name:       perl-local-lib
 Version:    1.008010
-Release:    1%{?dist}
+Release:    3%{?dist}
 # lib/local/lib.pm -> GPL+ or Artistic
 License:    GPL+ or Artistic
 Group:      Development/Libraries
@@ -8,6 +8,9 @@ Summary:    Create and use a local lib/ for perl modules
 Source:     http://search.cpan.org/CPAN/authors/id/E/ET/ETHER/local-lib-%{version}.tar.gz
 # Allow evaluation in CSH, RHBZ #849609, CPAN RT #60072
 Patch0:     local-lib-1.008009-Append-semicolon-to-setenv.patch
+# Fix setting variables in CSH, RHBZ #1032195, CPAN RT #85667,
+# upstream is going the refactor the whole code, patch not sent to upstream
+Patch1:     local-lib-1.008010-Fix-setting-undefined-variable-in-CSH.patch
 Url:        http://search.cpan.org/dist/local-lib
 Requires:   perl(:MODULE_COMPAT_%(eval "`perl -V:version`"; echo $version))
 BuildArch:  noarch
@@ -65,6 +68,7 @@ install this package.
 %prep
 %setup -q -n local-lib-%{version}
 %patch0 -p1
+%patch1 -p1
 rm -rf inc
 
 %build
@@ -91,6 +95,12 @@ make test
 %{_sysconfdir}/profile.d/*
 
 %changelog
+* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 1.008010-3
+- Mass rebuild 2013-12-27
+
+* Thu Nov 21 2013 Petr Pisar <ppisar@redhat.com> - 1.008010-2
+- Fix setting undefined variable in CSH (bug #1032195)
+
 * Fri Jun 07 2013 Iain Arnell <iarnell@gmail.com> 1.008010-1
 - update to latest upstream version
 

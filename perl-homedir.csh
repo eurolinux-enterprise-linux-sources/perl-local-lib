@@ -11,10 +11,10 @@ if (-f "$HOME/.perl-homedir") then
 	source "$HOME/.perl-homedir"
 endif
 
-alias perlll 'eval `perl -Mlocal::lib`'
+alias perlll 'eval "`perl -Mlocal::lib`"'
 
 # if system default
 if ("x$PERL_HOMEDIR" == "x1") then
-	eval `perl -Mlocal::lib`
+	eval "`perl -Mlocal::lib`"
 endif
 
